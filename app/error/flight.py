@@ -1,0 +1,2 @@
+class NotFoundFlight(Exception):
+    pass
