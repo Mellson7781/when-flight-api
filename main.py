@@ -3,6 +3,7 @@ import uvicorn
 
 from app.core.config import settings
 from app.api.routers.ping import ping_rt
+from app.core.lifespan import lifespan
 
 
 app = FastAPI(
@@ -10,6 +11,7 @@ app = FastAPI(
     debug=settings.DEBUG,
     description=settings.DESCRIPTION,
     version=settings.VERSION,
+    lifespan=lifespan
 )
 
 
