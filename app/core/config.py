@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     DESCRIPTION: str
     VERSION: str
 
+    HOST: str
+    PORT: int
+
     RapidAPI_Key: str
     RapidAPI_Host: str = "aerodatabox.p.rapidapi.com"
 
