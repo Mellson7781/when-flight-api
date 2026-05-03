@@ -5,9 +5,27 @@ description = ""
 authors = [
     {name = "mell191",email = "nikitakorobincev008@email.com"}
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.14"
 dependencies = [
+    # Core
+    "fastapi>=0.118.0",
+    "uvicorn[standard]>=0.30.0",
+
+    # Data / validation
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.2.0",
+
+    # Utils
+    "python-multipart>=0.0.9",
+    "httpx>=0.28.1",
+    "pytest>=9.0.3",
+
+    #Redis
+    "redis>=7.4.0",
 ]
+
+[tool.poetry]
+package-mode = false
 
 
 [build-system]
