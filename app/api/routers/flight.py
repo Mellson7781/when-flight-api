@@ -14,7 +14,7 @@ from app.error.flight import NotFoundFlight, LittleDate
 flight_rt = APIRouter(prefix="/api/filght", tags=[Tags.FLIGHT])
 
 
-@flight_rt.get("/searech/number/", response_model=Flight)
+@flight_rt.get("/searech/number", response_model=Flight)
 async def get_flight(
     filters_query: Annotated[QueryFilters, Query()],
     service: Annotated[FlightService, Depends(get_service)]

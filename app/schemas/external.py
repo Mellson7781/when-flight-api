@@ -1,4 +1,4 @@
-from pydantic import BaseModel, field_validator, Field
+from pydantic import BaseModel, field_validator, model_validator
 from datetime import datetime, date
 
 
@@ -29,3 +29,22 @@ class ExternalFlight(BaseModel):
         if isinstance(v, str):
             return datetime.fromisoformat(v).date()
         return v
+    
+    @model_validator(mode="before")
+    @classmethod
+    def check_required_datetimes(cls, values):
+        required_fields = [
+            "arrival_scheduledTime",
+            "arrival_scheduledTime_utc",
+            "departure_scheduledTime",
+            "departure_scheduledTime_utc",
+        ]
+
+        missing = [f for f in required_fields if values.get(f) is None]
+
+        if missing:
+            raise ValueError(
+                f"ExternalFlight missing required datetime fields: {', '.join(missing)}"
+            )
+
+        return values
