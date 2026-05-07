@@ -42,19 +42,7 @@ class FlightService:
         departures_delay = await self._probability_of_delay(departuresDelayInfo)
         arrivals_delay = await self._probability_of_delay(arrivalsDelayInfo)
         
-        if departures_delay >= arrivals_delay:
-            delay_index = departures_delay
-        else:
-            delay_index = arrivals_delay
-        
-        if delay_index == 0.0:
-            raise LittleDate()
-        elif delay_index < 1.0:
-            delay = StatusType.LOW
-        elif delay_index < 3.0:
-            delay = StatusType.MEDIUM
-        else:
-            delay = StatusType.HIGh
+        delay = await self._status_delay(departures_delay, arrivals_delay)
 
         return OutForescast(departure_airoport=departuresDelayInfo, arrival_airoport=arrivalsDelayInfo, chance_of_delay=delay)
 
@@ -89,3 +77,20 @@ class FlightService:
     async def _probability_of_delay(self, delayInfo: AiroportDelay):
         delay_index = await self._finding_the_average(delayInfo.departuresDelayInformation.delayIndex, delayInfo.arrivalsDelayInformation.delayIndex)
         return delay_index
+    
+    async def _status_delay(self, departures_delay: float, arrivals_delay: float):
+        if departures_delay >= arrivals_delay:
+            delay_index = departures_delay
+        else:
+            delay_index = arrivals_delay
+        
+        if delay_index == 0.0:
+            raise LittleDate()
+        elif delay_index < 1.0:
+            delay = StatusType.LOW
+        elif delay_index < 3.0:
+            delay = StatusType.MEDIUM
+        else:
+            delay = StatusType.HIGh
+
+        return delay
