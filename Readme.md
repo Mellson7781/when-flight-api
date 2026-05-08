@@ -150,7 +150,7 @@ GET /ping
 ## Поиск рейса
 
 ```http
-GET /api/flight/searech/number
+GET /api/flight/search/number
 ```
 
 ### Query параметры
@@ -163,7 +163,7 @@ GET /api/flight/searech/number
 ### Пример запроса
 
 ```http
-GET /api/flight/searech/number?number=LH1234&LocalDate=2026-03-30
+GET /api/flight/search/number?number=LH1234&LocalDate=2026-03-30
 ```
 
 ### Пример ответа
