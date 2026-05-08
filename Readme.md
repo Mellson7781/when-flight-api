@@ -150,7 +150,7 @@ GET /ping
 ## Поиск рейса
 
 ```http
-GET /api/filght/searech/number
+GET /api/flight/searech/number
 ```
 
 ### Query параметры
@@ -163,7 +163,7 @@ GET /api/filght/searech/number
 ### Пример запроса
 
 ```http
-GET /api/filght/searech/number?number=LH1234&LocalDate=2026-03-30
+GET /api/flight/searech/number?number=LH1234&LocalDate=2026-03-30
 ```
 
 ### Пример ответа
@@ -184,13 +184,13 @@ GET /api/filght/searech/number?number=LH1234&LocalDate=2026-03-30
 ## Прогноз задержки рейса
 
 ```http
-GET /api/filght/forecast
+GET /api/flight/forecast
 ```
 
 ### Пример запроса
 
 ```http
-GET /api/filght/forecast?number=LH1234&LocalDate=2026-03-30
+GET /api/flight/forecast?number=LH1234&LocalDate=2026-03-30
 ```
 
 ### Пример ответа
