@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: on-failure
+  
+  redis:
+    image: redis:7-alpine
+    container_name:  redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
