@@ -38,7 +38,7 @@ jobs:
           username: ${{ vars.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /path/to/app
+            cd /when-flight-api
             git pull
             npm install
             npm run build
