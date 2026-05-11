@@ -17,8 +17,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Login to Docker Registry
-        run: echo "${{ secrets.CI_REGISTRY_PASSWORD }}" | docker login -u "${{ vars.CI_REGISTRY_USER }}" --password-stdin ${{ vars.CI_REGISTRY }}
+      - name: Login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker image
         run: docker build --pull -t ${{ vars.DOCKER_IMAGE }}:latest .
