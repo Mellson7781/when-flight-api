@@ -39,6 +39,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd when-flight-api
-            git pull
-            npm install
-            npm run build
+            git pull origin main
+            docker compose down
+            docker compose up -d --build
