@@ -14,13 +14,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Login to Docker Registry
-        run: echo "${{ secrets.CI_REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.CI_REGISTRY_USER }}" --password-stdin ${{ vars.CI_REGISTRY }}
+        run: echo "${{ secrets.CI_REGISTRY_PASSWORD }}" | docker login -u "${{ vars.CI_REGISTRY_USER }}" --password-stdin ${{ vars.CI_REGISTRY }}
 
       - name: Build Docker image
-        run: docker build --pull -t ${{ secrets.DOCKER_IMAGE }}:latest .
+        run: docker build --pull -t ${{ vars.DOCKER_IMAGE }}:latest .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_IMAGE }}:latest
+        run: docker push ${{ vars.DOCKER_IMAGE }}:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -30,8 +30,8 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
+          host: ${{ vars.SSH_HOST }}
+          username: ${{ vars.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /path/to/app
